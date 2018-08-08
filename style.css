@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  overflow: hidden;
+  cursor: none;
+}
+
+.mouse-pointer {
+  background: white;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  position: absolute;
+  opacity: 0.5;
+}
