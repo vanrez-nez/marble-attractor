@@ -1,16 +1,13 @@
-import * as THREE from "three";
-import { TweenLite } from "gsap";
+
 import AttractorPhysics from "./attractor-physics";
 
-const MARBLE_ENV_MAP =
-  "https://uploads.codesandbox.io/uploads/user/247f581b-6ce6-4f8f-9888-2fa9ee5b2d9a/uNSN-marble_env.jpg";
-const MARBLE_ROUGHNESS_MAP =
-  "https://uploads.codesandbox.io/uploads/user/247f581b-6ce6-4f8f-9888-2fa9ee5b2d9a/9HCs-metal_ball_roughness_map.jpg";
+const MARBLE_ENV_MAP = "src/assets/marble_env.jpg";
+const MARBLE_ROUGHNESS_MAP = "src/assets/metal_ball_roughness_map.jpg";
 
 const MARBLES_COUNT = 50;
 const CACHED_VEC2 = new THREE.Vector2();
 
-export class MarbleAttractor {
+export class App {
   constructor() {
     this.width = 0;
     this.height = 0;
@@ -59,7 +56,6 @@ export class MarbleAttractor {
     c.maxDistance = 1000;
     this.orbitControls = c;
     this.axesHelper = new THREE.AxesHelper(500);
-
     scene.add(this.axesHelper);
   }
 
@@ -199,4 +195,4 @@ export class MarbleAttractor {
   }
 }
 
-new MarbleAttractor();
+new App();

@@ -1,5 +1,3 @@
-import * as THREE from "three";
-
 export default class AttractorBody {
   constructor() {
     (this.mass = 1), (this.friction = 0.05);
