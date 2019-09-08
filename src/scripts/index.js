@@ -41,6 +41,7 @@ export class App {
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     this.scene = new THREE.Scene();
+    window.scene = this.scene;
     this.camera = new THREE.PerspectiveCamera(45, w / h, 0.1, 1000);
     this.camera.position.set(0, 0, 2);
     this.clock = new THREE.Clock();
@@ -62,7 +63,7 @@ export class App {
   initLights() {
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
     const hemiLight = new THREE.HemisphereLight(0xffffff, 0xff00fc, 0.5);
-    const pLight1 = new THREE.PointLight(0xb69bc6, 0.5, 100);
+    const pLight1 = new THREE.PointLight(0xFCD581, 0.5, 100);
     pLight1.castShadow = true;
     pLight1.position.set(5, 5, 5);
     const pLightHelper = new THREE.PointLightHelper(pLight1, 1);
@@ -79,7 +80,7 @@ export class App {
     const geo = new THREE.IcosahedronBufferGeometry(2, 1);
     const mat = new THREE.MeshStandardMaterial({
       side: THREE.BackSide,
-      color: 0x333333,
+      color: 0x55286F,
       metalness: 0.5,
       roughness: 0.8,
       flatShading: false
@@ -93,7 +94,7 @@ export class App {
     const mat = new THREE.MeshStandardMaterial({
       roughnessMap: new THREE.TextureLoader().load(MARBLE_ROUGHNESS_MAP),
       envMap: this.envTexture,
-      color: 0x333333,
+      color: 0xB74F6F,
       metalness: 0.3,
       roughness: 1
       //wireframe: true,
@@ -116,7 +117,7 @@ export class App {
     const geo = new THREE.IcosahedronBufferGeometry(1, 4);
     const mat = new THREE.MeshStandardMaterial({
       roughnessMap: new THREE.TextureLoader().load(MARBLE_ROUGHNESS_MAP),
-      color: 0x333333,
+      color: 0xFCD581,
       envMap: this.envTexture,
       metalness: 0.3,
       roughness: 1
@@ -161,10 +162,9 @@ export class App {
     const { innerWidth: w, innerHeight: h } = window;
     e.preventDefault();
     this.mouse.x = (e.clientX / w) * 2 - 1;
-    this.mouse.y = (e.clientY / h) * 2 + 1;
-    this.mouseElement.style.transform = `translate(${e.clientX}px, ${
-      e.clientY
-    }px)`;
+    this.mouse.y = - (e.clientY / h) * 2 + 1;
+    this.mouseElement.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    console.log(this.mouse)
   }
 
   updateInput() {
@@ -172,15 +172,12 @@ export class App {
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObject(centerMarble);
     centerMarble.material.wireframe = intersects.length > 0;
-
     CACHED_VEC2.set(0, 0);
     const dist = mouse.distanceTo(CACHED_VEC2);
     this.mouseElement.style.opacity = dist < 0.8 ? 1 : 0.5;
-    if (dist < 0.8) {
       const x = mouse.x * Math.max(0, 1 - dist);
       const y = mouse.y * Math.max(0, 1 - dist);
       centerMarble.position.set(mouse.x, mouse.y, 0);
-    }
   }
 
   onFrame() {
