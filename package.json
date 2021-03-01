@@ -33,7 +33,7 @@
         "dat.gui": "^0.7.2",
         "gsap": "^2.0.1",
         "normalize.css": "^8.0.0",
-        "three": "^0.95.0"
+        "three": "^0.125.0"
     },
     "devDependencies": {
         "ajv": "^6.3.0",
